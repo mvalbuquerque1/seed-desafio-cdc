@@ -5,6 +5,7 @@ import com.deveficiente.desafiocdc.domain.dto.AuthorResponse;
 import com.deveficiente.desafiocdc.domain.entity.Author;
 import com.deveficiente.desafiocdc.mapper.AuthorMapper;
 import com.deveficiente.desafiocdc.repository.AuthorRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class AuthorController {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<AuthorResponse> saveAuthor(@RequestBody @Valid AuthorRequest authorRequest) {
         Author authorToSave = authorMapper.authorRequestToAuthor(authorRequest);
         authorToSave.setCreatedAt(LocalDateTime.now());

@@ -17,14 +17,6 @@ public class AuthorRequest {
     @Size(max = 400)
     private String description;
 
-    public AuthorRequest() {
-    }
-
-    public AuthorRequest(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
     public String getName() {
         return name;
     }
