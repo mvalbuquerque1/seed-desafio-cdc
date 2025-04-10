@@ -1,41 +1,30 @@
-package com.deveficiente.desafiocdc.domain.entity;
+package com.deveficiente.desafiocdc.domain.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
-import java.util.Objects;
+public class AuthorResponse {
 
-@Entity
-@Table(name = "author")
-public class Author {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
-
     @NotEmpty(message = "Name must not to be null")
     private String name;
-    @Email
     @NotEmpty(message = "Email must not to be null")
+    @Email
     private String email;
     @NotEmpty(message = "Description must not to be null")
     @Size(max = 400)
     private String description;
 
-    @NotNull
-    private LocalDateTime createdAt;
-
-    public Author() {
+    public AuthorResponse() {
     }
 
-    public Author(String name, String email) {
+    public AuthorResponse(Long id, String name, String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
-        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -68,25 +57,5 @@ public class Author {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Author author = (Author) o;
-        return Objects.equals(id, author.id) && Objects.equals(email, author.email) && Objects.equals(createdAt, author.createdAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, createdAt);
     }
 }

@@ -1,6 +1,7 @@
 package com.deveficiente.desafiocdc.api;
 
 import com.deveficiente.desafiocdc.domain.dto.AuthorRequest;
+import com.deveficiente.desafiocdc.domain.dto.AuthorResponse;
 import com.deveficiente.desafiocdc.domain.entity.Author;
 import com.deveficiente.desafiocdc.mapper.AuthorMapper;
 import com.deveficiente.desafiocdc.repository.AuthorRepository;
@@ -28,10 +29,12 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<Author> saveAuthor(@RequestBody @Valid AuthorRequest authorRequest) {
-        Author savedAuthor = authorMapper.authorRequestToAuthor(authorRequest);
-        savedAuthor.setCreatedAt(LocalDateTime.now());
-        return ResponseEntity.ok(authorRepository.save(savedAuthor));
+    public ResponseEntity<AuthorResponse> saveAuthor(@RequestBody @Valid AuthorRequest authorRequest) {
+        Author authorToSave = authorMapper.authorRequestToAuthor(authorRequest);
+        authorToSave.setCreatedAt(LocalDateTime.now());
+        Author savedAuthor = authorRepository.save(authorToSave);
+        AuthorResponse response = authorMapper.authorToAuthorResponse(savedAuthor);
+        return ResponseEntity.ok(response);
     }
 
 }
