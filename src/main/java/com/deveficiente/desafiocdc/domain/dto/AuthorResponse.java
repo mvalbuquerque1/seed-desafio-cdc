@@ -1,11 +1,14 @@
 package com.deveficiente.desafiocdc.domain.dto;
 
+import java.time.LocalDateTime;
+
 public class AuthorResponse {
 
     private Long id;
     private String name;
     private String email;
     private String description;
+    private LocalDateTime createdAt;
 
     public Long getId() {
         return id;
@@ -37,5 +40,13 @@ public class AuthorResponse {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

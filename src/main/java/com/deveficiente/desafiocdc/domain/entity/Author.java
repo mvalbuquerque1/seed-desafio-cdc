@@ -32,10 +32,10 @@ public class Author {
     public Author() {
     }
 
-    public Author(String name, String email) {
+    public Author(String name, String email, String description) {
         this.name = name;
         this.email = email;
-        this.createdAt = LocalDateTime.now();
+        this.description = description;
     }
 
     public Long getId() {
