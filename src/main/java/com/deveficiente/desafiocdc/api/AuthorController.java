@@ -34,8 +34,10 @@ public class AuthorController {
     public ResponseEntity<AuthorResponse> saveAuthor(@RequestBody @Valid AuthorRequest authorRequest) {
         Author authorToSave = authorMapper.authorRequestToAuthor(authorRequest);
         authorToSave.setCreatedAt(LocalDateTime.now());
+
         Author savedAuthor = authorRepository.save(authorToSave);
         AuthorResponse response = authorMapper.authorToAuthorResponse(savedAuthor);
+
         return ResponseEntity.ok(response);
     }
 
