@@ -1,4 +1,4 @@
-package com.deveficiente.desafiocdc.domain;
+package com.deveficiente.desafiocdc.domain.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -29,10 +29,13 @@ public class Author {
     @NotNull
     private LocalDateTime createdAt;
 
-    public Author(String name, String email, LocalDateTime createdAt) {
+    public Author() {
+    }
+
+    public Author(String name, String email) {
         this.name = name;
         this.email = email;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now();
     }
 
     public String getName() {
