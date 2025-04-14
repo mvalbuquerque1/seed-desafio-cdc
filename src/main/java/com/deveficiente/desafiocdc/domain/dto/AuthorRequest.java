@@ -1,6 +1,7 @@
 package com.deveficiente.desafiocdc.domain.dto;
 
-import com.deveficiente.desafiocdc.util.EmailUnique;
+import com.deveficiente.desafiocdc.domain.entity.Author;
+import com.deveficiente.desafiocdc.util.UniqueValue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -13,7 +14,7 @@ public class AuthorRequest {
     private String name;
     @NotEmpty(message = "Email must not to be null")
     @Email
-    @EmailUnique
+    @UniqueValue(domainClass = Author.class, fieldName = "email")
     private String email;
     @NotEmpty(message = "Description must not to be null")
     @Size(max = 400)

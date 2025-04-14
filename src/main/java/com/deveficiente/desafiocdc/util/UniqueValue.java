@@ -6,14 +6,18 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = EmailUniqueValidator.class)
+@Constraint(validatedBy = UniqueValueValidator.class)
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EmailUnique {
+public @interface UniqueValue {
 
-    String message() default "Email is already is use";
+    String message() default "Field already is use";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+    String fieldName();
+
+    Class<?> domainClass();
 }
