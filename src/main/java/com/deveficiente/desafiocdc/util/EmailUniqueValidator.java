@@ -18,6 +18,6 @@ public class EmailUniqueValidator implements ConstraintValidator<EmailUnique, St
     public boolean isValid(String email, ConstraintValidatorContext context) {
         if (email == null || email.isBlank()) return true;
         return authorRepository.findByEmail(email).isEmpty();
-
     }
 }
+
