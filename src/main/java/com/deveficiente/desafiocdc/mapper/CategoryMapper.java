@@ -1,6 +1,7 @@
 package com.deveficiente.desafiocdc.mapper;
 
 import com.deveficiente.desafiocdc.domain.dto.CategoryRequest;
+import com.deveficiente.desafiocdc.domain.dto.CategoryResponse;
 import com.deveficiente.desafiocdc.domain.entity.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,5 +13,7 @@ public interface CategoryMapper {
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
     @Mapping(target = "id", ignore = true)
-    Category toCategory(CategoryRequest categoryRequest);
+    Category categoryRequestToCategory(CategoryRequest categoryRequest);
+
+    CategoryResponse categoryToCategoryResponse(Category category);
 }

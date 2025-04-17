@@ -1,6 +1,7 @@
 package com.deveficiente.desafiocdc.api;
 
 import com.deveficiente.desafiocdc.domain.dto.CategoryRequest;
+import com.deveficiente.desafiocdc.domain.dto.CategoryResponse;
 import com.deveficiente.desafiocdc.domain.entity.Category;
 import com.deveficiente.desafiocdc.mapper.CategoryMapper;
 import com.deveficiente.desafiocdc.repository.CategoryRepository;
@@ -17,15 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
-    public CategoryController(CategoryRepository categoryRepository) {
+    public CategoryController(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
         this.categoryRepository = categoryRepository;
+        this.categoryMapper = categoryMapper;
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Category> createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
-        Category categoryToSave = CategoryMapper.INSTANCE.toCategory(categoryRequest);
-        return ResponseEntity.ok(categoryRepository.save(categoryToSave));
+    public ResponseEntity<CategoryResponse> createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
+        Category categoryToSave = categoryMapper.categoryRequestToCategory(categoryRequest);
+
+        Category savedCategory = categoryRepository.save(categoryToSave);
+        CategoryResponse response = categoryMapper.categoryToCategoryResponse(savedCategory);
+
+        return ResponseEntity.ok(response);
     }
 }
