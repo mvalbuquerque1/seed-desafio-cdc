@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class BookRequest {
 
     @NotEmpty
-    @UniqueValue(domainClass = Book.class, fieldName = "title")
+    @UniqueValue(domainClass = Book.class, fieldName = "title", message = "Title already registered")
     private String title;
 
     @NotEmpty
@@ -31,10 +31,9 @@ public class BookRequest {
     private int numberOfPages;
 
     @NotEmpty
-    @UniqueValue(domainClass = Book.class, fieldName = "isbn")
+    @UniqueValue(domainClass = Book.class, fieldName = "isbn", message = "Isbn already in use")
     private String isbn;
 
-    //TODO data precisa ser no futuro
     @Future
     private LocalDateTime publicationDate;
 
