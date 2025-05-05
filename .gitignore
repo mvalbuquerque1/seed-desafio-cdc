@@ -2,6 +2,7 @@
 *.class
 
 # Build directories
+.gradle/
 /build/
 /bin/
 /target/
