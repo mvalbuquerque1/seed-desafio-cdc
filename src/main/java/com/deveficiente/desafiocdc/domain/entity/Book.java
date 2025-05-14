@@ -1,5 +1,6 @@
 package com.deveficiente.desafiocdc.domain.entity;
 
+import com.deveficiente.desafiocdc.domain.dto.ListBookResponse;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "book")
@@ -48,6 +50,15 @@ public class Book {
     @NotNull
     @ManyToOne
     private Author author;
+
+    public static List<ListBookResponse> toListBookResponse(List<Book> books) {
+        return books.stream()
+                .map(book -> ListBookResponse.builder()
+                        .id(book.id)
+                        .title(book.title)
+                        .build())
+                .toList();
+    }
 
     public String getTitle() {
         return title;
